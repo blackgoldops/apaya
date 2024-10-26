@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebak-Tebakan nihhh</title>
+  <style>
+    body {
+      background-color: #f0e6f6;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 500px;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #d1639c;
+    }
+    p {
+      font-size: 1.2em;
+      color: #333;
+    }
+    button {
+      background-color: #d1639c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background-color: #bf5589;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.3em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tebak-Tebakan niiii</h1>
+    <p>Gojek kalau jek nya dihilangin jadi apa hayoo?</p>
+    <button onclick="jawab('a')">a. apa tuuuu</button>
+    <button onclick="jawab('b')">b. ga tau, ga peduli</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function jawab(pilihan) {
+      const result = document.getElementById("result");
+      if (pilihan === 'a') {
+        result.textContent = "Gomos di tangiangku ikkon ho gabe rokkaphu :)";
+      } else if (pilihan === 'b') {
+        result.textContent = "Ya ga asik lah :(";
+      }
+    }
+  </script>
+</body>
+</html>
