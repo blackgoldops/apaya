@@ -1,145 +1,186 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebak-Tebakan Romantis</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tebakan Romantis</title>
+<style>
+    /* Style dasar */
     body {
-      background: linear-gradient(to bottom right, #f8d3e8, #f0e6f6);
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
+        background-color: #ffdae0;
+        color: #333;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
     }
 
     .container {
-      background-color: #fff;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      width: 80%;
-      max-width: 500px;
-      padding: 30px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .container::before, .container::after {
-      content: "";
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background: url('https://i.pinimg.com/originals/0f/9a/4c/0f9a4cf79e5e251b233c54e18fca899f.png') no-repeat center / contain;
-      animation: float 6s ease-in-out infinite;
-      opacity: 0.3;
-    }
-
-    .container::before {
-      top: -20px;
-      left: -30px;
-      transform: rotate(-15deg);
-    }
-
-    .container::after {
-      bottom: -20px;
-      right: -30px;
-      transform: rotate(15deg);
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        border: 5px solid #ff5c8a;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); 
+        position: relative;
+        z-index: 10;
+        overflow: hidden; 
     }
 
     h1 {
-      color: #d1639c;
-      font-size: 2.2em;
+        font-size: 1.8em;
+        color: #ff5c8a;
+        animation: pulse 1.5s infinite;
     }
 
-    p {
-      font-size: 1.2em;
-      color: #555;
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .options {
+        margin-top: 20px;
     }
 
     button {
-      background-color: #d1639c;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-size: 1em;
-      cursor: pointer;
-      margin: 5px;
-      transition: background-color 0.3s;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: background 0.3s, transform 0.2s;
     }
 
     button:hover {
-      background-color: #bf5589;
+        transform: scale(1.1);
     }
 
-    .result {
-      margin-top: 20px;
-      font-size: 1.3em;
-      color: #d1639c;
-      font-weight: bold;
-      animation: fadeIn 1s forwards;
+    .btn-a {
+        background-color: #ff5c8a;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .btn-b {
+        background-color: #8c8c8c;
+    }
+
+    
+    .floating-element {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        opacity: 0.8;
+        animation: float 10s linear infinite;
+        pointer-events: none;
+    }
+
+    .flower {
+        background-color: pink;
+        border-radius: 50%;
+        box-shadow: 10px 0px pink, -10px 0px pink, 0px 10px pink, 0px -10px pink;
+    }
+
+    .heart {
+        background-color: red;
+        width: 20px;
+        height: 20px;
+        transform: rotate(-45deg);
+        top: 50%;
+        left: 50%;
+        margin: -10px 0 0 -10px;
+    }
+
+    .heart:before,
+    .heart:after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+    }
+
+    .heart:before {
+        top: -10px;
+        left: 0;
+    }
+
+    .heart:after {
+        left: 10px;
+        top: 0;
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+        from {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
     }
 
-    /* Floating Flowers */
-    .flower {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      background-image: url('https://i.pinimg.com/originals/0f/9a/4c/0f9a4cf79e5e251b233c54e18fca899f.png');
-      background-size: cover;
-      opacity: 0.5;
-      animation: float 10s ease-in-out infinite;
-      pointer-events: none;
+    /* Response style */
+    #response {
+        font-size: 1.4em;
+        color: #ff5c8a;
+        margin-top: 20px;
+        animation: fadeIn 1s;
     }
 
-    .flower:nth-child(1) { animation-delay: 0s; left: 10%; }
-    .flower:nth-child(2) { animation-delay: 2s; left: 30%; }
-    .flower:nth-child(3) { animation-delay: 4s; left: 60%; }
-    .flower:nth-child(4) { animation-delay: 6s; left: 80%; }
-  </style>
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Tebak-Tebakan Niiii</h1>
-    <p>Gojek kalau jek nya dihilangin jadi apa hayoo?</p>
-    <button onclick="jawab('a')">a. apa tuuuu</button>
-    <button onclick="jawab('b')">b. ga tau, ga peduli</button>
-    <div id="result" class="result"></div>
-  </div>
 
-  <!-- Floating flowers -->
-  <div class="flower"></div>
-  <div class="flower"></div>
-  <div class="flower"></div>
-  <div class="flower"></div>
+<div class="container">
+    <h1>Harimau, kalo rimau-nya dihilangin jadi apa hayoo?</h1>
+    <div class="options">
+        <button class="btn-a" onclick="showAnswer('a')">Apaa tuu?</button>
+        <button class="btn-b" onclick="showAnswer('b')">Ga mau tau, cape</button>
+    </div>
+    <div id="response"></div>
+    <!-- pake lagu mu ngap -->
+    <audio id="audio" src="audio.mp3"></audio> 
+</div>
 
-  <script>
-    function jawab(pilihan) {
-      const result = document.getElementById("result");
-      if (pilihan === 'a') {
-        result.textContent = "Gomos di tangiangku ikkon ho gabe rokkaphu :)";
-      } else if (pilihan === 'b') {
-        result.textContent = "Ya ga asik lah :(";
-      }
+<!-- Floating objects -->
+<script>
+    function createFloatingObject(type) {
+        const object = document.createElement('div');
+        object.classList.add('floating-element', type);
+        object.style.left = Math.random() * 100 + 'vw';
+        object.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        document.body.appendChild(object);
     }
-  </script>
+
+    //floating flowers and hearts
+    for (let i = 0; i < 20; i++) {
+        createFloatingObject('flower');
+        createFloatingObject('heart');
+    }
+
+    function showAnswer(option) {
+        const response = document.getElementById("response");
+        const audio = document.getElementById("audio");
+        if (option === 'a') {
+            response.innerHTML = "Haholongakku do ho saleleng au mangolu, Nang ro di dinalao mate pe";
+            audio.play();
+        } else {
+            response.innerHTML = "Dah lah, >:(";
+            audio.pause(); 
+            audio.currentTime = 0;
+        }
+    }
+</script>
+
 </body>
 </html>
-
-
